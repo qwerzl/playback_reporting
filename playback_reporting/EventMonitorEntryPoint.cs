@@ -225,6 +225,11 @@ namespace playback_reporting
             string deviceName = session.DeviceName;
             string clientName = session.Client;
             string session_playing_id = session.NowPlayingItem.Id;
+            string session_playing_overall_id = session.NowPlayingItem.Id;
+            if (session.NowPlayingItem.Type == "Episode")
+            {
+                session_playing_overall_id = session.NowPlayingItem.SeriesId;
+            }
 
             string key = deviceId + "-" + userId + "-" + session_playing_id;
 
@@ -247,6 +252,7 @@ namespace playback_reporting
                 playback_info.DeviceName = deviceName;
                 playback_info.ClientName = clientName;
                 playback_info.ItemId = session_playing_id;
+                playback_info.OverallItemId = session_playing_overall_id;
                 playback_info.ItemName = GetItemName(session.NowPlayingItem);
                 playback_info.PlaybackMethod = GetPlaybackMethod(session);
                 playback_info.ItemType = session.NowPlayingItem.Type;

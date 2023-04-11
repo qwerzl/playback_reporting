@@ -483,9 +483,9 @@ namespace playback_reporting.Data
         public void AddPlaybackAction(PlaybackInfo play_info)
         {
             string sql_add = "insert into PlaybackActivity " +
-                "(DateCreated, UserId, ItemId, ItemType, ItemName, PlaybackMethod, ClientName, DeviceName, PlayDuration, PauseDuration) " +
+                "(DateCreated, UserId, ItemId, ItemType, ItemName, PlaybackMethod, ClientName, DeviceName, PlayDuration, PauseDuration, OverallItemId) " +
                 "values " +
-                "(@DateCreated, @UserId, @ItemId, @ItemType, @ItemName, @PlaybackMethod, @ClientName, @DeviceName, @PlayDuration, @PauseDuration)";
+                "(@DateCreated, @UserId, @ItemId, @ItemType, @ItemName, @PlaybackMethod, @ClientName, @DeviceName, @PlayDuration, @PauseDuration, @OverallItemId)";
 
             using (lock_manager.getLockItem().Write())
             {
@@ -505,6 +505,7 @@ namespace playback_reporting.Data
                             statement.TryBind("@DeviceName", play_info.DeviceName);
                             statement.TryBind("@PlayDuration", play_info.PlaybackDuration);
                             statement.TryBind("@PauseDuration", play_info.PausedDuration);
+                            statement.TryBind("@OverallItemId", play_info.OverallItemId);
                             statement.MoveNext();
                         }
                     }, TransactionMode);

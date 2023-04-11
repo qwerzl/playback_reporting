@@ -27,6 +27,7 @@ namespace playback_reporting.Data
         
         public string UserId { get; set; }
         public string ItemId { get; set; }
+        public string OverallItemId { get; set; }
         public string ItemType { get; set; }
         public string ItemName { get; set; }
         public string PlaybackMethod { get; set; }
